@@ -1491,6 +1491,7 @@ id barrier
 id beginning
 id blocking
 id bottom
+id button
 id buttonPanel
 id cancel_button
 id center
@@ -1528,6 +1529,7 @@ id dimensions
 id direct
 id disableHome
 id dropdown_menu
+id editText
 id edit_query
 id end
 id enterAlways
@@ -1902,6 +1904,7 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string errorName
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior

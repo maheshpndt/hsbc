@@ -1,13 +1,17 @@
 package com.weatherapp.activities
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.location.*
 import com.weatherapp.R
 import com.weatherapp.adapters.Adapter
 import com.weatherapp.models.ResponseWeather
@@ -15,16 +19,23 @@ import com.weatherapp.network.WeatherService
 import com.weatherapp.utils.Constants
 import retrofit.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var mAdapter: Adapter
+    private lateinit var weatherList: ResponseWeather
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initView()
         getWeatherDetails();
 
+    }
+
+    private fun initView() {
+        val button = findViewById<Button>(R.id.button)
+        button.setOnClickListener(this)
     }
 
     /**
@@ -114,11 +125,46 @@ class MainActivity : AppCompatActivity() {
      * Method executed to set data to the recycler view
      */
     private fun setAdapter(weatherList: ResponseWeather) {
+        this.weatherList = weatherList
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         mAdapter = Adapter(weatherList.list)
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.layoutManager = layoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.adapter = mAdapter
+    }
+
+    override fun onClick(p0: View?) {
+        if (p0 != null) {
+            if (p0.id == R.id.button) {
+                val editText = findViewById<EditText>(R.id.editText)
+                if (!TextUtils.isEmpty(editText.text)) {
+                    val someList: List<String> =
+                        weatherList.list.filter { it.name.startsWith(editText.text) }
+                            .map { it.name }
+                    val count = someList.count()
+                    showAlertDialog("Count of number of cities started with $count")
+                } else {
+                    showAlertDialog(getString(R.string.errorName))
+                }
+            }
+        }
+    }
+
+    /**
+     * Method execute to show alert box of count
+     */
+    private fun showAlertDialog(message: String) {
+        val alertDialog: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
+        alertDialog.setTitle("Alert")
+        alertDialog.setMessage(message)
+        alertDialog.setPositiveButton(
+            "yes"
+        ) { _, _ ->
+            Toast.makeText(this@MainActivity, "Alert dialog closed.", Toast.LENGTH_LONG).show()
+        }
+        val alert: AlertDialog = alertDialog.create()
+        alert.setCanceledOnTouchOutside(false)
+        alert.show()
     }
 }
