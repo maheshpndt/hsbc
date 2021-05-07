@@ -161,7 +161,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         alertDialog.setPositiveButton(
             "yes"
         ) { _, _ ->
-            Toast.makeText(this@MainActivity, "Alert dialog closed.", Toast.LENGTH_LONG).show()
         }
         val alert: AlertDialog = alertDialog.create()
         alert.setCanceledOnTouchOutside(false)
