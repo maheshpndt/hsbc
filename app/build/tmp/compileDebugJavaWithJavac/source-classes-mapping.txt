@@ -1,0 +1,18 @@
+com/weatherapp/models/ListItem.java
+ com.weatherapp.models.ListItem
+com/weatherapp/models/Clouds.java
+ com.weatherapp.models.Clouds
+com/weatherapp/BuildConfig.java
+ com.weatherapp.BuildConfig
+com/weatherapp/models/Wind.java
+ com.weatherapp.models.Wind
+com/weatherapp/models/Main.java
+ com.weatherapp.models.Main
+com/weatherapp/models/Coord.java
+ com.weatherapp.models.Coord
+com/weatherapp/models/ResponseWeather.java
+ com.weatherapp.models.ResponseWeather
+com/weatherapp/models/WeatherItem.java
+ com.weatherapp.models.WeatherItem
+com/weatherapp/models/Rain.java
+ com.weatherapp.models.Rain
