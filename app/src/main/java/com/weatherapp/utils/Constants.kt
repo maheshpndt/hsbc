@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import androidx.appcompat.app.AlertDialog
 
 object Constants {
 
@@ -31,4 +32,27 @@ object Constants {
             return networkInfo != null && networkInfo.isConnectedOrConnecting
         }
     }
+
+    /**
+     * Method execute to show alert box of count
+     */
+    fun showAlertDialog(context: Context,message: String) {
+        val alertDialog: AlertDialog.Builder = AlertDialog.Builder(context)
+        alertDialog.setTitle("Alert")
+        alertDialog.setMessage(message)
+        alertDialog.setPositiveButton(
+            "yes"
+        ) { _, _ ->
+        }
+        val alert: AlertDialog = alertDialog.create()
+        alert.setCanceledOnTouchOutside(false)
+        alert.show()
+    }
+
+}
+
+enum class Status {
+    SUCCESS,
+    ERROR,
+    LOADING
 }
